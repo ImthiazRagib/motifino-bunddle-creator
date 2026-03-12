@@ -1,16 +1,63 @@
-# React + Vite
+## Motifino Strap Bundler
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + Vite demo that recreates a watch‑strap “bundler” experience similar to high‑end e‑commerce configurators.  
+Users can preview strap images, choose strap materials, and see pricing in a clean, Tailwind‑styled UI.
 
-Currently, two official plugins are available:
+### Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React + Vite** – fast SPA setup and dev server
+- **Tailwind CSS** – utility‑first styling
+- **JavaScript (ESM)** – no TypeScript for simplicity
 
-## React Compiler
+### Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Strap preview panel**  
+  Two straps stacked one above another, using real images from the `assets` folder. Layout adapts with Tailwind for a subtle, premium look.
 
-## Expanding the ESLint configuration
+- **Image selector**  
+  Reusable `ImageSelectable` component that shows either:
+  - A strap image, or  
+  - An SVG belt‑shaped placeholder when no image is available.  
+  Clicking an image tile updates the main strap preview.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Material option groups**  
+  `StrapOptions` component composed of:
+  - `OptionGroup` – section header + description (Full Grain, Suede, Vegan)  
+  - `OptionSwatch` – small, clickable color/texture chips  
+  Selected options are highlighted using Tailwind classes.
+
+- **Price bar**  
+  `PriceBar` shows base and discounted price, quantity stepper (+/–), and “ADD TO CART” button. Sticky at the bottom of the left panel for a true checkout feel.
+
+- **Composable components**  
+  `BundleConfigurator` – main layout shell.  
+  `StrapPreview` / `StrapPreviewRow` – encapsulate visual strap logic.  
+  `bundleVisuals` data file for mapping IDs → images.
+
+### Getting Started
+
+```bash
+# install dependencies
+yarn       # or: npm install
+
+# start dev server
+yarn dev   # or: npm run dev
+```
+
+Then open the printed localhost URL (usually `http://localhost:5173`) in your browser.
+
+### Project Structure (key files)
+
+- `src/App.jsx` – mounts the main `BundleConfigurator`.
+- `src/components/BundleConfigurator.jsx` – overall page layout and state.
+- `src/components/StrapPreview.jsx` / `StrapPreviewRow.jsx` – left‑side strap visuals.
+- `src/components/ImageSelectable.jsx` – generic image + SVG placeholder selector.
+- `src/components/StrapOptions.jsx`, `OptionGroup.jsx`, `OptionSwatch.jsx` – right‑side material options.
+- `src/components/PriceBar.jsx` – price + quantity + CTA.
+- `src/data/bundleVisuals.js` – strap/buckle image references.
+
+### Customization
+
+- Add or change strap images in `src/assets/bunddle` and update `bundleVisuals.js`.
+- Adjust Tailwind classes in the components to tweak spacing, typography, or colors.
+- Extend the bundler with new steps (e.g., case, dial, stitching) by reusing the existing option and image‑select components.
