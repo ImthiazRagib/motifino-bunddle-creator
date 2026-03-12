@@ -30,7 +30,8 @@ const BundleConfigurator = () => {
     const [suedeSelection, setSuedeSelection] = useState(SUEDE[0])
     const [veganSelection, setVeganSelection] = useState(VEGAN[0])
     const [quantity, setQuantity] = useState(1)
-    const [selectedBundleId, setSelectedBundleId] = useState(bundleVisuals[0]?.id)
+    const [firstSelectedId, setFirstSelectedId] = useState(bundleVisuals[0]?.id)
+    const [secondSelectedId, setSecondSelectedId] = useState(bundleVisuals[1]?.id)
 
     const primaryColor = fullGrainSelection.color
     const secondaryColor = useMemo(
@@ -52,7 +53,7 @@ const BundleConfigurator = () => {
                         </span>
                     </div>
                     <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-inner">
-                        <StrapPreview selectedId={selectedBundleId} />
+                        <StrapPreview firstSelectedId={firstSelectedId} secondSelectedId={secondSelectedId} />
                     </div>
 
                     <PriceBar
@@ -64,7 +65,8 @@ const BundleConfigurator = () => {
                 </section>
 
                 <section className="flex flex-col space-y-4 w-full">
-                    <DropdownItem title="1. Strap" subtitle="choose strap" options={bundleVisuals} selectedId={selectedBundleId} setSelectedId={setSelectedBundleId} />
+                    <DropdownItem title="1. Strap" subtitle="choose strap" options={bundleVisuals} selectedId={firstSelectedId} setSelectedId={setFirstSelectedId} />
+                    <DropdownItem title="2. Buckle" subtitle="choose buckle" options={bundleVisuals} selectedId={secondSelectedId} setSelectedId={setSecondSelectedId} />
                 </section>
             </div>
         </main>
